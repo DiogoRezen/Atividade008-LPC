@@ -1,7 +1,9 @@
 import pygame
 #from obj import Obj
-from menu import Menu, GameOver
+from menu import Menu
+from gameover import GameOver
 from game import Game
+from config import SIZE_WINDOW_X, SIZE_WINDOW_Y, DEFAULT_LIFE_BEE, DEFAULT_PTS_BEE, N_TICKS
 
 
 class Main:
@@ -20,7 +22,7 @@ class Main:
 
         #self.window = pygame.display.set_mode([sizex, sizey])   #funcoes do pygame
         #self.title = pygame.display.set_caption(title)          #funcoes do pygame
-        self.window = pygame.display.set_mode([360, 640])           #funcoes do pygame
+        self.window = pygame.display.set_mode([SIZE_WINDOW_X, SIZE_WINDOW_Y])           #funcoes do pygame
         self.title = pygame.display.set_caption("Bee Honey Infinity Runner")        #funcoes do pygame
 
         #self.menu = Menu()                                      #variavel self.menu armazena a
@@ -94,8 +96,8 @@ class Main:
             self.start_screen.change_scene = False
             self.game.change_scene = False
             self.gameover.change_scene = False
-            self.game.bee.life = 3
-            self.game.bee.pts = 0
+            self.game.bee.life = DEFAULT_LIFE_BEE
+            self.game.bee.pts = DEFAULT_PTS_BEE
                                                                 
     def events(self):
         #for events in pygame.event.get():
@@ -133,7 +135,7 @@ class Main:
 
     def update(self):
         while self.loop:
-            self.fps.tick(30)                       #a cada segundo, a função .tick(), do objeto self.fps
+            self.fps.tick(N_TICKS)                       #a cada segundo, a função .tick(), do objeto self.fps
                                                     #criado no construtor __int__(), da classe Main, carregará
                                                     #30 imagens na cada segundo na tela.
                                                     #Por isso foi colocado dentro do laço while
@@ -144,4 +146,4 @@ class Main:
 
 #game = Main(360, 640, "BeeHoney")
 #game.update()
-Main().update()
+#Main().update()

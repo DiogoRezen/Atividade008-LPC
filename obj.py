@@ -91,7 +91,7 @@ class Obj:
                                 #o número da imagem de cada componente que será carregado na tela
                                 #para dar a idéia de movimento.
         
-
+'''
 class Bee(Obj):
 
     def __init__(self, image, x, y):
@@ -191,5 +191,5 @@ class Text:
 
     def update_text(self, update):
         self.render = self.font.render(update, False, (255, 255, 255))
-        
+'''        
         

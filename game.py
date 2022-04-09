@@ -1,4 +1,7 @@
-from obj import Obj, Bee, Text
+from obj import Obj
+from bee import Bee
+from text import Text
+import config as cf
 import random
 
 
@@ -6,9 +9,9 @@ class Game:
 
     def __init__(self):
 
-        self.bg = Obj("assets/bg.png", 0, 0)            #bg é o background que será o
+        self.bg = Obj("assets/bg.png", cf.INIT_X, cf.INIT_Y)            #bg é o background que será o
                                                         #o fundo da tela do jogo
-        self.bg2 = Obj("assets/bg.png", 0, -640)        #bg2 é o background que será o
+        self.bg2 = Obj("assets/bg.png", cf.INIT_X, cf.POSITION_Y_BG2)        #bg2 é o background que será o
                                                         #o fundo da tela do jogo. Ele
                                                         #ficará em clico com bg para que
                                                         #um fique em continuação com o
@@ -23,7 +26,7 @@ class Game:
                                                         #são reposicionadas no início, dando a
                                                         #impressão de movimento.
         
-        self.spider = Obj("assets/spider1.png",random.randrange(0, 320), -50)
+        self.spider = Obj("assets/spider1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)
                                                         #na linha acima a primeira aranha
                                                         #é gerada em uma posição aleatória
         
@@ -44,11 +47,11 @@ class Game:
                                             #carregadas a cada segundo (30 imagens), para dar suavidade
                                             #ao movimento e animação dos objetos na tela.
 
-        self.flower = Obj("assets/florwer1.png",random.randrange(0, 320), 200)
+        self.flower = Obj("assets/florwer1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_FLOWER)
                                             #criação do objeto flor, que tem todos os
                                             #métodos da classe Obj()
 
-        self.bee = Bee("assets/bee1.png",150,600)
+        self.bee = Bee("assets/bee1.png",cf.INITIAL_POSITION_BEE_X,cf.INITIAL_POSITION_BEE_Y)
                                             #cria o objeto bee, da classe Bee, que
                                             #herdou tudo de Obj, mais o método criado para movimentar
                                             #a abelha pelo mouse (método move_bee)
@@ -62,8 +65,8 @@ class Game:
                                             #alterada de acordo com os metodos de cada classe,
                                             #carregando a tela desejada, ou de menu, ou de jogo,
                                             #ou de gameover
-        self.score = Text(120,"0")
-        self.lifes = Text(60,"3")
+        self.score = Text(cf.SIZE_TEXT_SCORE,cf.INIT_TEXT_SCORE)
+        self.lifes = Text(cf.SIZE_TEXT_LIFES,cf.INIT_TEXT_LIFES)
 
     def draw(self, window):                 #Funcao que desenha na tela bg e bg2
         self.bg.draw(window)             #Como bg e bg2 são atualizados a cada iteração 
@@ -85,8 +88,8 @@ class Game:
         self.flower.draw(window)         #desenho da flor na tela do jogo. Segue o mesmo
                                             #raciocínio do objeto spider
 
-        self.score.draw(window,160,50)
-        self.lifes.draw(window,50,50)
+        self.score.draw(window,cf.POSITION_TEXT_SCORE_X,cf.POSITION_TEXT_SCORE_Y)
+        self.lifes.draw(window,cf.POSITION_TEXT_LIFES_X,cf.POSITION_TEXT_LIFES_Y)
                                             #objetos criados com base na classe
                                             #Text (Obj)
                                             #self.lifes é a variavel que controla o
@@ -97,7 +100,7 @@ class Game:
                                             #quando ocorrer qualquer tipo de movimentação
                                             #da mesma, apenas do background
         
-        self.bg.sprite.rect[1] += 10  #1    #é atribuido ao self.bg, a posição y, sendo atualizada
+        self.bg.sprite.rect[1] += cf.TAX_UPDATE_Y_BG  #1    #é atribuido ao self.bg, a posição y, sendo atualizada
                                             #1 pixel por fps, dando a impressão de movimento
                                             #O sprite.rect são as propriedades adquiridas da classe
                                             #Obj, que são atribuidas ao objeto self.bg, e que nesse
@@ -105,7 +108,7 @@ class Game:
                                             #entradas no método construtor: image, x, y
                                             #Essa posição em y é atualizada a cada vez que for chamada
                                             #no laço while, do método update, do objeto Main
-        if self.bg.sprite.rect[1] >= 640:
+        if self.bg.sprite.rect[1] >= cf.POS_INITIAL_Y_BG:
             self.bg.sprite.rect[1] = 0
                                             #estas 3 primeiras linhas fazem a figura do fundo de mover
                                             #de y=0 até y=640 (limite da tela na vertical.
@@ -113,10 +116,10 @@ class Game:
                                             #para reiniciar o ciclo
 
             
-        self.bg2.sprite.rect[1] += 10  #1
+        self.bg2.sprite.rect[1] += cf.TAX_UPDATE_Y_BG2  #1
 
         if self.bg2.sprite.rect[1] >= 0:
-            self.bg2.sprite.rect[1] = -640
+            self.bg2.sprite.rect[1] = cf.POS_INITIAL_Y_BG2
                                             #se self.bg2 chegar na posição 0, ele retornar para
                                             #-640. Assim, nao vemos descontinuidades na figura
                                             #dando a impressão de movimento de subida mesmo com
@@ -131,7 +134,7 @@ class Game:
                                             #mais rapidamente.
     def update(self):
         self.move_bg()
-        self.spider.anim("spider", 8, 5)    #esta linha, após a modificação do metodo anim(), da
+        self.spider.anim("spider", cf.N_TICKS_SPIDER, cf.N_SPRITES_SPIDER)    #esta linha, após a modificação do metodo anim(), da
                                             #classe Obj, inseri o nome da imagem a ser carregada,
                                             #o número de ticks (8) que é de quanto em quanto tempo
                                             #fazemos a alteração do sprite, e a quantidade de frames
@@ -145,11 +148,11 @@ class Game:
                                             #pelo metodo spider.anim() e o movimento das aranhas pela
                                             #tela pelo método move_spiders()
 
-        self.flower.anim("florwer", 8, 3)   #animação das flores, com base no metodo anim()
+        self.flower.anim("florwer", cf.N_TICKS_FLOWER, cf.N_SPRITES_FLOWER)   #animação das flores, com base no metodo anim()
                                             #pertencente a classe Obj
         self.move_flower()
 
-        self.bee.anim("bee", 2, 5) 
+        self.bee.anim("bee", cf.N_TICKS_BEE, cf.N_SPRITES_BEE) 
         #self.bee.anim("bee", 8, 4)          #animacao da figura da abelha, pelo metodo anim()
                                             #pertencente a classe obj, com a cada 8 ticks
                                             #gera um ciclo de amostras na tela de sequencia das
@@ -198,14 +201,14 @@ class Game:
     def move_spiders(self):
                                             #função responsavel por movimentar/transladar a
                                             #aranha pela pela
-        self.spider.sprite.rect[1] += 11
+        self.spider.sprite.rect[1] += cf.TAX_UPDATE_Y_SPIDER
                                             #objeto aranha desce a tela a uma taxa de 10 pixels a
                                             #cada frame
 
-        if self.spider.sprite.rect[1] > 640:
+        if self.spider.sprite.rect[1] > cf.LIM_Y_SPIDER:
             self.spider.sprite.kill()       #ao sair da tela, na parte inferior,
                                             #o objeto aranha é eliminado
-            self.spider = Obj("assets/spider1.png", random.randrange(0, 320), -50)
+            self.spider = Obj("assets/spider1.png", random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)
                                             #após a primeira aranha ser eliminada pela função
                                             #sprite.kill(), com a chamada do método update(),
                                             #que chama o método move_spiders(), da classe Game,
@@ -217,14 +220,14 @@ class Game:
     def move_flower(self):
                                             #função responsavel por movimentar/transladar a
                                             #flor pela pela
-        self.flower.sprite.rect[1] += 8
+        self.flower.sprite.rect[1] += cf.TAX_UPDATE_Y_FLOWER
                                             #objeto flor desce a tela a uma taxa de 6 pixels a
                                             #cada frame
 
-        if self.flower.sprite.rect[1] > 640:
+        if self.flower.sprite.rect[1] > cf.LIM_Y_FLOWER:
             self.flower.sprite.kill()       #ao sair da tela, na parte inferior,
                                             #o objeto flor é eliminado
-            self.flower = Obj("assets/florwer1.png", random.randrange(0, 320), -100)
+            self.flower = Obj("assets/florwer1.png", random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.INITIAL_POSITION_FLOWER_Y)
                                             #após a primeira flor ser eliminada pela função
                                             #sprite.kill(), com a chamada do método update(),
                                             #que chama o método move_spiders(), da classe Game,

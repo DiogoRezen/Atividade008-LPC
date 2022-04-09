@@ -1,5 +1,6 @@
 import pygame
 from obj import Obj
+import config as cf
 
 #classe responsavel pelas cenas, ou troca de telas, do jogo
 #cada objeto criado na classe Menu será uma cena separada, ou seja,
@@ -9,7 +10,7 @@ class Menu:
 
     def __init__(self, image):
 
-        self.bg = Obj(image, 0, 0)
+        self.bg = Obj(image, cf.INIT_X, cf.INIT_Y)
 
         self.change_scene = False           #ao clicar enter, o método event.type, da classe Menu
                                             #é, é True, torcando o estado da variavel self.change_scene
@@ -93,10 +94,10 @@ class Menu:
                                             #Com self.change_scene sendo verdadeiro, podemos
                                             #trocar a cena/tela para o qual quisermos.
                 #print(self.change_scene)
-
+'''
 class GameOver(Menu):
     
     def __init__(self, image):
         super().__init__(image)
-
+'''
                                 
