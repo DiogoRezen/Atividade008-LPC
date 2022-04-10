@@ -151,7 +151,8 @@ class Game:
                                             #dela. Nesse caso, no da aranha, temos 5 figuras que compoem
                                             #o movimento completo dela.
             
-        self.move_spiders()                 #ao criarmos o método move_spiders(), devemos chamo-lo
+        self.spider1.move_spider()
+        self.reset_spider()                #ao criarmos o método move_spiders(), devemos chamo-lo
                                             #no método update, pois no update() temos a animação da aranha
                                             #pelo metodo spider.anim() e o movimento das aranhas pela
                                             #tela pelo método move_spiders()
@@ -161,7 +162,8 @@ class Game:
         self.flower1.anim("florwer", cf.N_TICKS_FLOWER, cf.N_SPRITES_FLOWER)
         
         #self.move_flower()
-        self.move_flower()
+        self.flower1.move_flower()
+        self.reset_flower()
 
         self.bee.anim("bee", cf.N_TICKS_BEE, cf.N_SPRITES_BEE) 
         #self.bee.anim("bee", 8, 4)          #animacao da figura da abelha, pelo metodo anim()
@@ -210,48 +212,14 @@ class Game:
                                             #variáveis do tipo texto (esta no arquivo obj)
         
 
-    def move_spiders(self):
-                                            #função responsavel por movimentar/transladar a
-                                            #aranha pela pela
-        #self.spider.sprite.rect[1] += cf.TAX_UPDATE_Y_SPIDER
-                                            #objeto aranha desce a tela a uma taxa de 10 pixels a
-                                            #cada frame
+    def reset_spider(self):
 
-        #if self.spider.sprite.rect[1] > cf.LIM_Y_SPIDER:
-            #self.spider.sprite.kill()       #ao sair da tela, na parte inferior,
-                                            #o objeto aranha é eliminado
-            #self.spider = Obj("assets/spider1.png", random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)
-                                            #após a primeira aranha ser eliminada pela função
-                                            #sprite.kill(), com a chamada do método update(),
-                                            #que chama o método move_spiders(), da classe Game,
-                                            #temo a criação de uma nova aranha em uma posição, também,
-                                            #aleatória, no inicio da tela de jogo, na parte superior
-                                            #da janela do jogo.
-            #print("aranha morreu")
-        self.spider1.sprite.rect[1] += cf.TAX_UPDATE_Y_SPIDER
         if self.spider1.sprite.rect[1] > cf.LIM_Y_SPIDER:
             self.spider1.sprite.kill()
-            self.spider1 = Spider("assets/spider1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)       
+            self.spider1 = Spider("assets/spider1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)
 
-    def move_flower(self):
-                                            #função responsavel por movimentar/transladar a
-                                            #flor pela pela
-#        self.flower.sprite.rect[1] += cf.TAX_UPDATE_Y_FLOWER
-                                            #objeto flor desce a tela a uma taxa de 6 pixels a
-                                            #cada frame
+    def reset_flower(self):
 
-#        if self.flower.sprite.rect[1] > cf.LIM_Y_FLOWER:
-#            self.flower.sprite.kill()       #ao sair da tela, na parte inferior,
-                                            #o objeto flor é eliminado
-#            self.flower = Obj("assets/florwer1.png", random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.INITIAL_POSITION_FLOWER_Y)
-                                            #após a primeira flor ser eliminada pela função
-                                            #sprite.kill(), com a chamada do método update(),
-                                            #que chama o método move_spiders(), da classe Game,
-                                            #temo a criação de uma nova flor em uma posição, também,
-                                            #aleatória, no inicio da tela de jogo, na parte superior
-                                            #da janela do jogo.
-            #print("flor morreu")
-        self.flower1.sprite.rect[1] += cf.TAX_UPDATE_Y_FLOWER
         if self.flower1.sprite.rect[1] > cf.LIM_Y_FLOWER:
             self.flower1.sprite.kill()
             self.flower1 = Flower("assets/florwer1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.INITIAL_POSITION_FLOWER_Y)
