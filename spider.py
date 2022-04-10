@@ -1,9 +1,9 @@
-from obj import Obj
+from np_mobile_obj import NPMobileObj
 import config as cf
 import random
 
 
-class Spider(Obj):
+class Spider(NPMobileObj):
 
     def __init__(self, image, x, y):
         super().__init__(image, x, y)

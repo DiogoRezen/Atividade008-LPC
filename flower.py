@@ -1,8 +1,8 @@
-from obj import Obj
+from np_mobile_obj import NPMobileObj
 import random
 import config as cf
 
-class Flower(Obj):
+class Flower(NPMobileObj):
 
     def __init__(self, image, x, y):
         super().__init__(image, x, y)
