@@ -28,7 +28,6 @@ class Bee(Obj):
             self.sound_pts.play()               
             print(self.pts)
         elif name == "Spider" and colision:
-            #print("Spider")
             self.life -= 1                      
             self.sound_block.play()             
             print(self.life)
