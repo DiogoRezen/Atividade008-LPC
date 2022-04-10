@@ -9,7 +9,8 @@ class Menu:
 
         self.bg = Obj(image, cf.INIT_X, cf.INIT_Y)
 
-        self.change_scene = False          
+        self.change_scene = False
+
     def draw(self, window):
         self.bg.draw(window)                
 
@@ -17,7 +18,8 @@ class Menu:
         if event.type == pygame.KEYDOWN:            
             if event.key == pygame.K_RETURN:
                 self.change_scene = True
-                                          
+
+
 class GameOver(Menu):
     
     def __init__(self, image):

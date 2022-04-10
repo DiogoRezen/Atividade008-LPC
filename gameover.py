@@ -1,5 +1,5 @@
-import pygame
 from menu import Menu
+
 
 class GameOver(Menu):
     

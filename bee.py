@@ -2,12 +2,13 @@ import pygame
 from obj import Obj
 import config as cf
 
+
 class Bee(Obj):
 
     def __init__(self, image, x, y):
         super().__init__(image, x, y)
                                                                    
-        pygame.mixer.init()                                        
+        pygame.mixer.init()
         self.sound_pts = pygame.mixer.Sound("assets/sounds/score.ogg")
         self.sound_block = pygame.mixer.Sound("assets/sounds/bateu.ogg")
         self.life = cf.DEFAULT_LIFE_BEE                                               
@@ -25,10 +26,10 @@ class Bee(Obj):
                                                 
         if name == "Flower" and colision:
             self.pts += 1                       
-            self.sound_pts.play()               
+            self.sound_pts.play()
             print(self.pts)
         elif name == "Spider" and colision:
             self.life -= 1                      
-            self.sound_block.play()             
+            self.sound_block.play()
             print(self.life)
                                                 
