@@ -3,6 +3,7 @@ from bee import Bee
 from text import Text
 import config as cf
 import random
+from flower import Flower
 
 
 class Game:
@@ -47,9 +48,12 @@ class Game:
                                             #carregadas a cada segundo (30 imagens), para dar suavidade
                                             #ao movimento e animação dos objetos na tela.
 
-        self.flower = Obj("assets/florwer1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_FLOWER)
+        #self.flower = Obj("assets/florwer1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_FLOWER)
                                             #criação do objeto flor, que tem todos os
                                             #métodos da classe Obj()
+        self.flower1 = Flower("assets/florwer1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_FLOWER)
+                                            #copia o objeto flower_obj, criado na classe Flower
+                                            #que tem todas instancias e metodos de Obj
 
         self.bee = Bee("assets/bee1.png",cf.INITIAL_POSITION_BEE_X,cf.INITIAL_POSITION_BEE_Y)
                                             #cria o objeto bee, da classe Bee, que
@@ -85,8 +89,10 @@ class Game:
                                             #(indice da figura da imagem spider), atualizado a cada vez
                                             #que o metodo anim, da classe Obj é chamado
 
-        self.flower.draw(window)         #desenho da flor na tela do jogo. Segue o mesmo
+        #self.flower.draw(window)         #desenho da flor na tela do jogo. Segue o mesmo
                                             #raciocínio do objeto spider
+        self.flower1.draw(window)
+        
 
         self.score.draw(window,cf.POSITION_TEXT_SCORE_X,cf.POSITION_TEXT_SCORE_Y)
         self.lifes.draw(window,cf.POSITION_TEXT_LIFES_X,cf.POSITION_TEXT_LIFES_Y)
@@ -148,8 +154,11 @@ class Game:
                                             #pelo metodo spider.anim() e o movimento das aranhas pela
                                             #tela pelo método move_spiders()
 
-        self.flower.anim("florwer", cf.N_TICKS_FLOWER, cf.N_SPRITES_FLOWER)   #animação das flores, com base no metodo anim()
+        #self.flower.anim("florwer", cf.N_TICKS_FLOWER, cf.N_SPRITES_FLOWER)   #animação das flores, com base no metodo anim()
                                             #pertencente a classe Obj
+        self.flower1.anim("florwer", cf.N_TICKS_FLOWER, cf.N_SPRITES_FLOWER)
+        
+        #self.move_flower()
         self.move_flower()
 
         self.bee.anim("bee", cf.N_TICKS_BEE, cf.N_SPRITES_BEE) 
@@ -173,7 +182,8 @@ class Game:
                                             #O spider é o nome do grupo instanciado no construtor
                                             #da classe game, criado com base da classe Obj
 
-        self.bee.colision(self.flower.group, "Flower")
+        #self.bee.colision(self.flower.group, "Flower")
+        self.bee.colision(self.flower1.group, "Flower")
                                             #chama o metodo colision, da classe Bee, e coloca o
                                             #grupo flower (self.group = pygame.sprite.Group(),
                                             #que foi criado com a classe Obj, para
@@ -215,19 +225,19 @@ class Game:
                                             #temo a criação de uma nova aranha em uma posição, também,
                                             #aleatória, no inicio da tela de jogo, na parte superior
                                             #da janela do jogo.
-            #print("aranha morreu")
+            #print("aranha morreu")       
 
     def move_flower(self):
                                             #função responsavel por movimentar/transladar a
                                             #flor pela pela
-        self.flower.sprite.rect[1] += cf.TAX_UPDATE_Y_FLOWER
+#        self.flower.sprite.rect[1] += cf.TAX_UPDATE_Y_FLOWER
                                             #objeto flor desce a tela a uma taxa de 6 pixels a
                                             #cada frame
 
-        if self.flower.sprite.rect[1] > cf.LIM_Y_FLOWER:
-            self.flower.sprite.kill()       #ao sair da tela, na parte inferior,
+#        if self.flower.sprite.rect[1] > cf.LIM_Y_FLOWER:
+#            self.flower.sprite.kill()       #ao sair da tela, na parte inferior,
                                             #o objeto flor é eliminado
-            self.flower = Obj("assets/florwer1.png", random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.INITIAL_POSITION_FLOWER_Y)
+#            self.flower = Obj("assets/florwer1.png", random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.INITIAL_POSITION_FLOWER_Y)
                                             #após a primeira flor ser eliminada pela função
                                             #sprite.kill(), com a chamada do método update(),
                                             #que chama o método move_spiders(), da classe Game,
@@ -235,6 +245,11 @@ class Game:
                                             #aleatória, no inicio da tela de jogo, na parte superior
                                             #da janela do jogo.
             #print("flor morreu")
+        self.flower1.sprite.rect[1] += cf.TAX_UPDATE_Y_FLOWER
+        if self.flower1.sprite.rect[1] > cf.LIM_Y_FLOWER:
+            self.flower1.sprite.kill()
+            self.flower1 = Flower("assets/florwer1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.INITIAL_POSITION_FLOWER_Y)
+
             
     def gameover(self):
         if self.bee.life <= 0:

@@ -191,5 +191,6 @@ class Text:
 
     def update_text(self, update):
         self.render = self.font.render(update, False, (255, 255, 255))
-'''        
+'''
+       
         
