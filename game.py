@@ -4,6 +4,7 @@ from text import Text
 import config as cf
 import random
 from flower import Flower
+from spider import Spider
 
 
 class Game:
@@ -27,7 +28,7 @@ class Game:
                                                         #são reposicionadas no início, dando a
                                                         #impressão de movimento.
         
-        self.spider = Obj("assets/spider1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)
+        self.spider1 = Spider("assets/spider1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)
                                                         #na linha acima a primeira aranha
                                                         #é gerada em uma posição aleatória
         
@@ -84,7 +85,7 @@ class Game:
                                             #da classe Game, que é objeto da classe Bee, que
                                             #herdou tudo da classe Obj mais os seus proprios metodos
         
-        self.spider.draw(window)         #desenha o objeto spider, criado no construtor da classe
+        #self.spider.draw(window)         #desenha o objeto spider, criado no construtor da classe
                                             #Game, com a figura atual, conforme o self.frame atual
                                             #(indice da figura da imagem spider), atualizado a cada vez
                                             #que o metodo anim, da classe Obj é chamado
@@ -92,6 +93,7 @@ class Game:
         #self.flower.draw(window)         #desenho da flor na tela do jogo. Segue o mesmo
                                             #raciocínio do objeto spider
         self.flower1.draw(window)
+        self.spider1.draw(window)
         
 
         self.score.draw(window,cf.POSITION_TEXT_SCORE_X,cf.POSITION_TEXT_SCORE_Y)
@@ -140,7 +142,7 @@ class Game:
                                             #mais rapidamente.
     def update(self):
         self.move_bg()
-        self.spider.anim("spider", cf.N_TICKS_SPIDER, cf.N_SPRITES_SPIDER)    #esta linha, após a modificação do metodo anim(), da
+        self.spider1.anim("spider", cf.N_TICKS_SPIDER, cf.N_SPRITES_SPIDER)    #esta linha, após a modificação do metodo anim(), da
                                             #classe Obj, inseri o nome da imagem a ser carregada,
                                             #o número de ticks (8) que é de quanto em quanto tempo
                                             #fazemos a alteração do sprite, e a quantidade de frames
@@ -174,7 +176,7 @@ class Game:
                                             #as duas linhas acima tem o mesmo raciocinio das linhas
                                             #self.spider.anim() e self.move_spiders()
 
-        self.bee.colision(self.spider.group, "Spider")
+        self.bee.colision(self.spider1.group, "Spider")
                                             #chama o metodo colision, da classe Bee, e coloca o
                                             #grupo spider (self.group = pygame.sprite.Group(),
                                             #que foi criado com a classe Obj, para
@@ -211,21 +213,25 @@ class Game:
     def move_spiders(self):
                                             #função responsavel por movimentar/transladar a
                                             #aranha pela pela
-        self.spider.sprite.rect[1] += cf.TAX_UPDATE_Y_SPIDER
+        #self.spider.sprite.rect[1] += cf.TAX_UPDATE_Y_SPIDER
                                             #objeto aranha desce a tela a uma taxa de 10 pixels a
                                             #cada frame
 
-        if self.spider.sprite.rect[1] > cf.LIM_Y_SPIDER:
-            self.spider.sprite.kill()       #ao sair da tela, na parte inferior,
+        #if self.spider.sprite.rect[1] > cf.LIM_Y_SPIDER:
+            #self.spider.sprite.kill()       #ao sair da tela, na parte inferior,
                                             #o objeto aranha é eliminado
-            self.spider = Obj("assets/spider1.png", random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)
+            #self.spider = Obj("assets/spider1.png", random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)
                                             #após a primeira aranha ser eliminada pela função
                                             #sprite.kill(), com a chamada do método update(),
                                             #que chama o método move_spiders(), da classe Game,
                                             #temo a criação de uma nova aranha em uma posição, também,
                                             #aleatória, no inicio da tela de jogo, na parte superior
                                             #da janela do jogo.
-            #print("aranha morreu")       
+            #print("aranha morreu")
+        self.spider1.sprite.rect[1] += cf.TAX_UPDATE_Y_SPIDER
+        if self.spider1.sprite.rect[1] > cf.LIM_Y_SPIDER:
+            self.spider1.sprite.kill()
+            self.spider1 = Spider("assets/spider1.png",random.randrange(0, cf.SIZE_WINDOW_X - 40), cf.POSITION_Y_SPIDER)       
 
     def move_flower(self):
                                             #função responsavel por movimentar/transladar a
