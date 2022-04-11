@@ -1,6 +1,8 @@
 import pygame
 import config as cf
 
+
+#Defining Text Class
 class Text:
 
     def __init__(self, size, text):
