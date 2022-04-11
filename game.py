@@ -51,7 +51,7 @@ class Game:
         )
         self.change_scene = False
         self.score = Text(cf.SIZE_TEXT_SCORE, cf.INIT_TEXT_SCORE)
-        self.lives = Text(cf.SIZE_TEXT_LIFES, cf.INIT_TEXT_LIFES)
+        self.lives = Text(cf.SIZE_TEXT_LIVES, cf.INIT_TEXT_LIVES)
 
     def update(self):
         while self.loop:
@@ -70,7 +70,7 @@ class Game:
             window, cf.POSITION_TEXT_SCORE_X, cf.POSITION_TEXT_SCORE_Y
         )
         self.lives.draw(
-            window, cf.POSITION_TEXT_LIFES_X, cf.POSITION_TEXT_LIFES_Y
+            window, cf.POSITION_TEXT_LIVES_X, cf.POSITION_TEXT_LIVES_Y
         )
 
     def update_objs(self):
