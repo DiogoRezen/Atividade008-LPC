@@ -3,6 +3,7 @@ import random
 import config as cf
 
 
+#Defining Flower Class
 class Flower(NPMobileObj):
 
     def __init__(self, image, x, y):
