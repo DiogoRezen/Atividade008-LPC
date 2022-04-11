@@ -3,6 +3,7 @@ from obj import Obj
 import config as cf
 
 
+#Creating Bee Class
 class Bee(Obj):
 
     def __init__(self, image, x, y):
@@ -10,7 +11,7 @@ class Bee(Obj):
                                                                    
         pygame.mixer.init()
         self.sound_pts = pygame.mixer.Sound("assets/sounds/score.ogg")
-        self.sound_block = pygame.mixer.Sound("assets/sounds/bateu.ogg")
+        self.sound_block = pygame.mixer.Sound("assets/sounds/collided.ogg")
         self.life = cf.DEFAULT_LIFE_BEE                                               
         self.pts = cf.DEFAULT_PTS_BEE                                                
         
@@ -20,15 +21,15 @@ class Bee(Obj):
             self.sprite.rect[0] = pygame.mouse.get_pos()[0] + cf.SHIFT_X_MOUSE    
             self.sprite.rect[1] = pygame.mouse.get_pos()[1] + cf.SHIFT_Y_MOUSE    
 
-    def colision(self, group, name):
+    def collision(self, group, name):
         name = name
         colision = pygame.sprite.spritecollide(self.sprite, group, True)
                                                 
-        if name == "Flower" and colision:
+        if name == "Flower" and collision:
             self.pts += 1                       
             self.sound_pts.play()
             print(self.pts)
-        elif name == "Spider" and colision:
+        elif name == "Spider" and collision:
             self.life -= 1                      
             self.sound_block.play()
             print(self.life)
