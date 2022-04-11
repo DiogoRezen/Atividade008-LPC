@@ -3,7 +3,7 @@ from obj import Obj
 import config as cf
 
 
-#Defining Bee Class
+# Defining Bee Class
 class Bee(Obj):
 
     def __init__(self, image, x, y):
