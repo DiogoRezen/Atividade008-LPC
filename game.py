@@ -31,7 +31,7 @@ class Game:
         self.loop = True
         self.fps = pygame.time.Clock()
         self.start_screen = Menu("assets/start.png")
-        self.game_over = GameOver("assets/gameover.png")
+        self.game_over = GameOver("assets/game_over.png")
         self.bg = NPMobileObj("assets/bg.png", cf.INIT_X, cf.INIT_Y)
         self.bg2 = NPMobileObj("assets/bg.png", cf.INIT_X, cf.POSITION_Y_BG2)
         self.spider1 = Spider(
@@ -40,7 +40,7 @@ class Game:
             cf.POSITION_Y_SPIDER,
         )
         self.flower1 = Flower(
-            "assets/florwer1.png",
+            "assets/flower1.png",
             random.randrange(0, cf.SIZE_WINDOW_X - 40),
             cf.POSITION_Y_FLOWER,
         )
@@ -80,11 +80,11 @@ class Game:
         self.bg2.reposition(0, cf.POS_INITIAL_Y_BG2)
         self.spider1.anim("spider", cf.N_TICKS_SPIDER, cf.N_SPRITES_SPIDER)
         self.spider1.move_spider()
-        self.flower1.anim("florwer", cf.N_TICKS_FLOWER, cf.N_SPRITES_FLOWER)
+        self.flower1.anim("flower", cf.N_TICKS_FLOWER, cf.N_SPRITES_FLOWER)
         self.flower1.move_flower()
         self.bee.anim("bee", cf.N_TICKS_BEE, cf.N_SPRITES_BEE)
-        self.bee.colision(self.spider1.group, "Spider")
-        self.bee.colision(self.flower1.group, "Flower")
+        self.bee.collision(self.spider1.group, "Spider")
+        self.bee.collision(self.flower1.group, "Flower")
         self.game_over_check()
         self.score.update_text(str(self.bee.pts))
         self.lifes.update_text(str(self.bee.life))
