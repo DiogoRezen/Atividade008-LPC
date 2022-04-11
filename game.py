@@ -51,7 +51,7 @@ class Game:
         )
         self.change_scene = False
         self.score = Text(cf.SIZE_TEXT_SCORE, cf.INIT_TEXT_SCORE)
-        self.lifes = Text(cf.SIZE_TEXT_LIFES, cf.INIT_TEXT_LIFES)
+        self.lives = Text(cf.SIZE_TEXT_LIFES, cf.INIT_TEXT_LIFES)
 
     def update(self):
         while self.loop:
@@ -69,7 +69,7 @@ class Game:
         self.score.draw(
             window, cf.POSITION_TEXT_SCORE_X, cf.POSITION_TEXT_SCORE_Y
         )
-        self.lifes.draw(
+        self.lives.draw(
             window, cf.POSITION_TEXT_LIFES_X, cf.POSITION_TEXT_LIFES_Y
         )
 
@@ -87,7 +87,7 @@ class Game:
         self.bee.collision(self.flower1.group, "Flower")
         self.game_over_check()
         self.score.update_text(str(self.bee.pts))
-        self.lifes.update_text(str(self.bee.life))
+        self.lives.update_text(str(self.bee.life))
 
     def game_over_check(self):
         if self.bee.life <= 0:
