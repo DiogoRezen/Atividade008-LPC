@@ -3,7 +3,7 @@ from obj import Obj
 import config as cf
 
 
-#Creating Bee Class
+#Defining Bee Class
 class Bee(Obj):
 
     def __init__(self, image, x, y):
@@ -23,7 +23,7 @@ class Bee(Obj):
 
     def collision(self, group, name):
         name = name
-        colision = pygame.sprite.spritecollide(self.sprite, group, True)
+        collision = pygame.sprite.spritecollide(self.sprite, group, True)
                                                 
         if name == "Flower" and collision:
             self.pts += 1                       
