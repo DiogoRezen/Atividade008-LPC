@@ -1,4 +1,4 @@
-#Main Class Parameters
+# Main Class Parameters
 SIZE_WINDOW_X = 360
 SIZE_WINDOW_Y = 640
 
@@ -7,7 +7,7 @@ DEFAULT_PTS_BEE = 0
 
 N_TICKS = 30
 
-#Game Class Parameters
+# Game Class Parameters
 POSITION_Y_BG2 = -640
 
 POSITION_Y_SPIDER = -50
@@ -50,13 +50,13 @@ TAX_UPDATE_Y_FLOWER = 8
 LIM_Y_FLOWER = 640
 INITIAL_POSITION_FLOWER_Y = -100
 
-#Bee Class Parameters
+# Bee Class Parameters
 SHIFT_X_MOUSE = -35
 SHIFT_Y_MOUSE = -30
 
-#Text Class Parameters
+# Text Class Parameters
 COLOR = (255, 255, 255)
 
-#Menu Class 
+# Menu Class 
 INIT_X = 0
 INIT_Y = 0
